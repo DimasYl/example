@@ -6,10 +6,10 @@ import {
     sendMessageCreator,
     updateNewMessageBodyCreator
 } from "../../redux/dialog-reducer";
-import {StoreType} from "../../redux/store";
+import {ReduxStoreType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
-    store: StoreType
+    store: ReduxStoreType
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {

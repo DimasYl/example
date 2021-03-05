@@ -27,7 +27,17 @@ type SendMessageActionType = {
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT =  "UPDATE-NEW-POST-TEXT"
 
-const profileReducer = (state: ProfilePageType, action: ActionTypes) => {
+let initialState =  {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likesCount: 10},
+        {id: 2, message: 'It\'s my first post', likesCount: 25},
+        {id: 3, message: 'Blabla', likesCount: 25},
+        {id: 4, message: 'Dada', likesCount: 25}
+    ],
+    newPostText: 'it-kamasutra.com'
+}
+
+const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
     switch (action.type){
         case ADD_POST :
             let newPost: PostType = {
