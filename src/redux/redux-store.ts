@@ -11,7 +11,5 @@ export type RootReduxState = ReturnType<typeof redusers>
 
 
 let store = createStore(redusers)
-
 export type ReduxStoreType = typeof store
-
 export default store

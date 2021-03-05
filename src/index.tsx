@@ -14,6 +14,7 @@ let rerenderEntireTree = () => {
         </BrowserRouter>, document.getElementById('root')
     );
 }
+
 rerenderEntireTree()
 
 store.subscribe(rerenderEntireTree)

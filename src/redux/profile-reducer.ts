@@ -1,5 +1,4 @@
 import {PostType, ProfilePageType} from "./store";
-import {ChangeEvent} from "react";
 
 export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBodyActionType | SendMessageActionType
 
@@ -56,8 +55,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
 }
 
 export const addPostActionCreator = (): ActionTypes => ({type: ADD_POST})//ТАКОЙ СИНТАКСИС
-export const updateNewPostTextCreator = (e: ChangeEvent<HTMLTextAreaElement>): ActionTypes => ({
-    type: UPDATE_NEW_POST_TEXT, newText: e.currentTarget.value
+export const updateNewPostTextCreator = (body: string): ActionTypes => ({
+    type: UPDATE_NEW_POST_TEXT, newText: body
 })
 
 
