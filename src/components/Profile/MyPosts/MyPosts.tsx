@@ -5,16 +5,16 @@ import {ProfilePageType} from "../../../redux/store";
 
 
 type MyPostsType = {
-    state: ProfilePageType
+    profilePage: ProfilePageType
     addPost: () => void
     postChange: (body: string) => void
 }
 
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
-    let state = props.state
-    let newPost = state.newPostText
-    let postsElement = state.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let profilePage = props.profilePage
+    let newPost = profilePage.newPostText
+    let postsElement = profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
 
     const addPost = () => {
