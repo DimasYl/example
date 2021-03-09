@@ -14,7 +14,7 @@ type MyPostsType = {
 export const MyPosts: React.FC<MyPostsType> = (props) => {
     let profilePage = props.profilePage
     let newPost = profilePage.newPostText
-    let postsElement = profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postsElement = profilePage.posts.map(p => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>)
 
 
     const addPost = () => {

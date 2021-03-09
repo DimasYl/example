@@ -12,8 +12,8 @@ type DialogsPropsType = {
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let dialogsPage = props.dialogsPage
-    let dialogsElement = dialogsPage.dialogs.map(d => <DialogItems name={d.name} id={d.id}/>)
-    let messagesElement = dialogsPage.messages.map(m => <Messages message={m.message}/>)
+    let dialogsElement = dialogsPage.dialogs.map(d => <DialogItems name={d.name} key={d.id} id={d.id}/>)
+    let messagesElement = dialogsPage.messages.map(m => <Messages message={m.message} key={m.id}/>)
 
     let newMessageBody = dialogsPage.newMessageBody
     const onSendMessageClick = () => {
