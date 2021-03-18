@@ -13,7 +13,7 @@ const Post = (props: PostPropsType) => {
             <img src='https://movies4maniacs.liberty.me/wp-content/uploads/sites/1218/2015/09/avatarsucks.jpg'  alt={''}/>
             { props.message }
             <div>
-                <span>like</span> { props.likesCount }
+                <span>likes</span> { props.likesCount }
             </div>
         </div>
     )
