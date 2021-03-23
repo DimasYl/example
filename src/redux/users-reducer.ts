@@ -21,8 +21,8 @@ type LocationType = {
 export type UsersType = {
     id: number
     followed: boolean
-    fullName: string
-    fotoUrl: string
+    name: string
+    photos: string
     status: string
     location: LocationType
 }
