@@ -15,7 +15,7 @@ import axios from "axios";
 import {Preloader} from "../common/Preloader/Preloader";
 
 
-type mapStateToPropsType = {
+type MapStateToPropsType = {
     users: Array<UsersType>
     pageSize: number
     totalUsersCount: number
@@ -23,7 +23,7 @@ type mapStateToPropsType = {
     isFetching: boolean
 }
 
-type mapDispatchToPropsType = {
+type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UsersType>) => void
@@ -32,19 +32,7 @@ type mapDispatchToPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
 }
 
-type UsersPropsType = {
-    users: Array<UsersType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setUsers: (users: Array<UsersType>) => void
-    setCurrentPage: (pageNumber: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-}
+type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 
 class UsersContainer extends React.Component<UsersPropsType> {
@@ -89,7 +77,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
 }
 
 
-let mapStateToProps = (state: RootReduxState): mapStateToPropsType => {
+let mapStateToProps = (state: RootReduxState): MapStateToPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -123,7 +111,7 @@ let mapStateToProps = (state: RootReduxState): mapStateToPropsType => {
 // }
 
 
-export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootReduxState>
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootReduxState>
 (mapStateToProps,
     {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersContainer)
 

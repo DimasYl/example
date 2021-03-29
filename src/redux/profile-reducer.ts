@@ -1,6 +1,11 @@
-import {PostType, ProfilePageType} from "./store";
+import {PostType} from "./store";
 
-export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBodyActionType | SendMessageActionType
+export type ActionTypes =
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | UpdateNewMessageBodyActionType
+    | SendMessageActionType
+    | SetUserProfileActionType
 
 type AddPostActionType = {
     type: 'ADD-POST'
@@ -21,44 +26,87 @@ type SendMessageActionType = {
     type: 'SEND_MESSAGE'
 }
 
+type SetUserProfileActionType = {
+    type: "SET_USER_PROFILE"
+    profile: any
+}
 
+type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+    profile: ProfileType | null
+}
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT =  "UPDATE-NEW-POST-TEXT"
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const SET_USER_PROFILE = "SET_USER_PROFILE"
 
-let initialState = {
+
+type ContactType ={
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob:boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactType
+    photos: {
+        small: string
+        large: string
+    }
+}
+
+let initialState: ProfilePageType = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 10},
         {id: 2, message: 'It\'s my first post', likesCount: 25},
         {id: 3, message: 'Blabla', likesCount: 25},
         {id: 4, message: 'Dada', likesCount: 25}
     ],
-    newPostText: 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com',
+    profile: null
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
-    switch (action.type){
+const profileReducer = (state= initialState, action: ActionTypes) => {
+    switch (action.type) {
         case ADD_POST : {
             let newPost: PostType = {
                 id: 5, message: state.newPostText, likesCount: 0
             }
-             return  {...state,
+            return {
+                ...state,
                 newPostText: '',
-            posts: [...state.posts, newPost]
+                posts: [...state.posts, newPost]
             }
         }
         case UPDATE_NEW_POST_TEXT: {
-            return {... state,
+            return {
+                ...state,
                 newPostText: action.newText
             }
         }
+        case "SET_USER_PROFILE":
+            return {
+                ...state, profile: action.profile
+            }
         default:
             return state
     }
 }
 
-export const addPostActionCreator = (): ActionTypes => ({type: ADD_POST})//ТАКОЙ СИНТАКСИС
-export const updateNewPostTextCreator = (body: string): ActionTypes => ({
+export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
+export const setUserProfile = (profile: ProfileType | null): SetUserProfileActionType => (
+    {type: SET_USER_PROFILE, profile})
+export const updateNewPostTextCreator = (body: string): UpdateNewPostTextActionType => ({
     type: UPDATE_NEW_POST_TEXT, newText: body
 })
 

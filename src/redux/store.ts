@@ -1,4 +1,4 @@
-import profileReducer from "./profile-reducer";
+import profileReducer, {ProfileType} from "./profile-reducer";
 import dialogsReducer, {ActionTypes} from "./dialog-reducer";
 
 export type PostType = {
@@ -17,6 +17,7 @@ export type MessageType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    profile: ProfileType | null
 }
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -48,7 +49,8 @@ const store: StoreType = {
                 {id: 3, message: 'Blabla', likesCount: 25},
                 {id: 4, message: 'Dada', likesCount: 25}
             ],
-            newPostText: 'it-kamasutra.com'
+            newPostText: 'it-kamasutra.com',
+            profile: null
         },
         dialogsPage: {
             dialogs: [

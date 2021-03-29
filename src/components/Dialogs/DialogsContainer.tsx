@@ -8,19 +8,22 @@ import {connect} from "react-redux";
 import {RootReduxState} from "../../redux/redux-store";
 import {DialogsPageType} from "../../redux/store";
 
-type mapStateToPropsType = {
+type MapStateToPropsType = {
     dialogsPage: DialogsPageType
 }
-type mapDispatchToPropsType = {
+type MapDispatchToPropsType = {
     sendMessage: () => void
     updateNewMessageBodyCreator: (body: string) => void
 }
-const mapStateToProps = (state: RootReduxState): mapStateToPropsType => {
+
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+const mapStateToProps = (state: RootReduxState): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
-const mapDispatchToProps = (dispatch: any): mapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: any): MapDispatchToPropsType => {
     return {
         sendMessage: () => {
             dispatch(sendMessageCreator())
@@ -33,6 +36,6 @@ const mapDispatchToProps = (dispatch: any): mapDispatchToPropsType => {
 
 
 const DialogsContainer
-    = connect<mapStateToPropsType,mapDispatchToPropsType,{},RootReduxState>(mapStateToProps, mapDispatchToProps)(Dialogs)
+    = connect<MapStateToPropsType,MapDispatchToPropsType,{},RootReduxState>(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default DialogsContainer
