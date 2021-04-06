@@ -28,7 +28,7 @@ type SendMessageActionType = {
 
 type SetUserProfileActionType = {
     type: "SET_USER_PROFILE"
-    profile: any
+    profile: ProfileType | null
 }
 
 type ProfilePageType = {
@@ -76,7 +76,7 @@ let initialState: ProfilePageType = {
     profile: null
 }
 
-const profileReducer = (state= initialState, action: ActionTypes) => {
+const profileReducer = (state= initialState, action: ActionTypes): ProfilePageType => {
     switch (action.type) {
         case ADD_POST : {
             let newPost: PostType = {

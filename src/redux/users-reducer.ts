@@ -70,7 +70,7 @@ let initialState: InitialStateType = {
     isFetching: true
 }
 
-const usersReducer = (state = initialState, action: ActionType) => {
+const usersReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
