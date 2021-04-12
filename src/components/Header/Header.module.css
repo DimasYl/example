@@ -7,10 +7,10 @@
     width: 20px;
 }
 
-.loginBlack {
+.loginBlock {
     float: right;
 }
 
-.loginBlack a {
+.loginBlock a {
     color: white;
 }

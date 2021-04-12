@@ -28,8 +28,6 @@ let initialState: AuthType = {
     isAuth: false
 }
 
-
-
 const authReducer = (state = initialState, action: ActionType): AuthType  => {
     switch (action.type) {
         case "SET_USER_DATA":
