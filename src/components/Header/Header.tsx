@@ -5,7 +5,6 @@ import {HeaderPropsType} from "./HeaderContainer";
 
 
 const Header = (props: HeaderPropsType) => {
-    debugger
     return <header className={s.header}>
         <img alt={''} src='https://www.freelogodesign.org/Content/img/logo-ex-7.png' />
 
