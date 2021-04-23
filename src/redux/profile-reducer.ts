@@ -1,4 +1,5 @@
 import {PostType} from "./store";
+import {usersAPI} from "../api/api";
 
 export type ActionTypes =
     AddPostActionType
@@ -109,6 +110,11 @@ export const setUserProfile = (profile: ProfileType | null): SetUserProfileActio
 export const updateNewPostTextCreator = (body: string): UpdateNewPostTextActionType => ({
     type: UPDATE_NEW_POST_TEXT, newText: body
 })
+export const getUserProfile = (userId: number) => (dispatch: any) => {
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfile(response.data))
+    })
+}
 
 
 export default profileReducer

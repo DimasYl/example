@@ -15,19 +15,7 @@ export const usersAPI = {
         ).then(response => {
             return response.data
         })
-    }
-}
-export const authAPI = {
-    authorized(){
-        return instanse.get(
-            `auth/me`
-        ).then(response => {
-            return response.data
-        })
-    }
-}
-
-export const followAPI = {
+    },
     followed(id: number){
         return instanse.post(
             `follow/${id}`, {}
@@ -38,6 +26,21 @@ export const followAPI = {
     unfollowed(id: number){
         return instanse.delete(
             `follow/${id}`).then(response => {
+            return response.data
+        })
+    },
+    getProfile(userId: number){
+       return instanse.get(
+            `https://social-network.samuraijs.com/api/1.0/profile/` + userId
+        )
+    }
+}
+
+export const auth = {
+    me(){
+        return instanse.get(
+            `auth/me`
+        ).then(response => {
             return response.data
         })
     }
