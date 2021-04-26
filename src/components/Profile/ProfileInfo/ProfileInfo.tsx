@@ -11,9 +11,9 @@ const ProfileInfo = (props: ProfilePropsType) => {
 
     return (
         <div>
-            <div>
-                <img
-                    src='https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350'
+            <div >
+                <img className={s.image}
+                    src='https://i.pinimg.com/originals/5a/df/1b/5adf1b97742a65d0a3c98299c545570b.jpg'
                     alt={'photo'}/>
             </div>
             <div className={s.descriptionBlock}>

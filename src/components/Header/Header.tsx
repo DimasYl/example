@@ -6,7 +6,7 @@ import {HeaderPropsType} from "./HeaderContainer";
 
 const Header = (props: HeaderPropsType) => {
     return <header className={s.header}>
-        <img alt={''} src='https://www.freelogodesign.org/Content/img/logo-ex-7.png' />
+        <img alt='' src='https://forse-112-ua.at.ua/_ld/0/83573628.png'/>
 
         <div className={s.loginBlock}>
             {props.isAuth ? props.login

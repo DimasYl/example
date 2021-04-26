@@ -105,9 +105,8 @@ let mapStateToProps = (state: RootReduxState): MapStateToPropsType => {
 //     }
 // }
 
-let AuthRedirectComponent = withAuthRedirect(UsersContainer)
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootReduxState>
+export default withAuthRedirect(connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootReduxState>
 (mapStateToProps, {follow, unfollow, followSuccess, unfollowSuccess,
     setCurrentPage, toggleFollowingProgress, getUsers
-    })(AuthRedirectComponent)
+    })(UsersContainer))
