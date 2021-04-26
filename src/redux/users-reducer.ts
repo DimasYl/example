@@ -1,4 +1,6 @@
 import {usersAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {RootReduxState} from "./redux-store";
 
 
 export type ActionType =
@@ -146,8 +148,10 @@ export const toggleFollowingProgress = (isFetching: boolean,userId: number): Tog
     type: "TOGGLE_IS_FOLLOWING_PROGRESS", isFetching, userId
 })
 
-export const getUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
+type ThunkType = ThunkAction<void, RootReduxState, unknown, ActionType>
+
+export const getUsers = (currentPage: number, pageSize: number):ThunkType => {
+    return (dispatch) => {
         dispatch(toggleIsFetching(true))
         usersAPI.getUsers(currentPage,pageSize).then((data) => {
             dispatch(toggleIsFetching(false))
@@ -157,8 +161,8 @@ export const getUsers = (currentPage: number, pageSize: number) => {
     }
 }
 
-export const follow = (id:number) => {
-    return (dispatch: any) => {
+export const follow = (id:number):ThunkType => {
+    return (dispatch) => {
         dispatch(toggleFollowingProgress(true, id))
         usersAPI.followed(id).then(data => {
             if (data.resultCode === 0) {
@@ -169,8 +173,8 @@ export const follow = (id:number) => {
     }
 }
 
-export const unfollow = (id:number) => {
-    return (dispatch: any) => {
+export const unfollow = (id:number):ThunkType => {
+    return (dispatch) => {
         dispatch(toggleFollowingProgress(true, id))
         usersAPI.unfollowed(id).then(data => {
             if (data.resultCode === 0) {
