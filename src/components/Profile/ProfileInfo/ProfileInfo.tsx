@@ -2,6 +2,8 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import {ProfilePropsType} from "../Profile";
 import {Preloader} from "../../common/Preloader/Preloader";
+import ProfileStatus from './ProfileStatus'
+
 
 const ProfileInfo = (props: ProfilePropsType) => {
 
@@ -11,11 +13,11 @@ const ProfileInfo = (props: ProfilePropsType) => {
 
     return (
         <div>
-            <div >
-                <img className={s.image}
-                    src='https://i.pinimg.com/originals/5a/df/1b/5adf1b97742a65d0a3c98299c545570b.jpg'
-                    alt={'photo'}/>
-            </div>
+            {/*<div >*/}
+            {/*    <img className={s.image}*/}
+            {/*        src='https://i.pinimg.com/originals/5a/df/1b/5adf1b97742a65d0a3c98299c545570b.jpg'*/}
+            {/*        alt={'photo'}/>*/}
+            {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img alt={''} src={props.profile.photos.large}/>
                 <h3>{props.profile.fullName}</h3>
@@ -27,6 +29,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
                 </b>
                 </div>
             </div>
+            <ProfileStatus status={'Hello friends'}/>
         </div>
     )
 }
