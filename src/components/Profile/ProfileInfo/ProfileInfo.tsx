@@ -29,7 +29,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
                 </b>
                 </div>
             </div>
-            <ProfileStatus status={'Hello friends'}/>
+            <ProfileStatus status={'Hello my friends'}/>
         </div>
     )
 }
