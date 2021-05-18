@@ -18,6 +18,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: ProfileType | null
+    status: string
 }
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -50,7 +51,8 @@ const store: StoreType = {
                 {id: 4, message: 'Dada', likesCount: 25}
             ],
             newPostText: 'it-kamasutra.com',
-            profile: null
+            profile: null,
+            status: ''
         },
         dialogsPage: {
             dialogs: [

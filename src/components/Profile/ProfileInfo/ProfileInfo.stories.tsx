@@ -6,4 +6,4 @@ export default {
     component: 'ProfileInfo'
 }
 
-export const ProfileStory = () => <ProfileInfo profile={null}/>
+export const ProfileStory = () => <ProfileInfo  profile={null} status={''} updateStatus={()=>{}}/>
