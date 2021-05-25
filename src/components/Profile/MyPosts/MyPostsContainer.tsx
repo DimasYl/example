@@ -1,8 +1,7 @@
 import React from 'react';
-import {addPostActionCreator, updateNewPostTextCreator} from "../../../redux/profile-reducer";
+import {addPostActionCreator, ProfilePageType} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {ProfilePageType} from "../../../redux/store";
 import {RootReduxState} from "../../../redux/redux-store";
 
 type mapStateToPropsType = {
@@ -10,8 +9,8 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    addPost: () => void
-    postChange: (body: string) => void
+    addPost: (newPostBody: string) => void
+
 }
 
 const mapStateToProps = (state: RootReduxState): mapStateToPropsType => {
@@ -21,11 +20,8 @@ const mapStateToProps = (state: RootReduxState): mapStateToPropsType => {
 }
 const mapDispatchToProps = (dispatch: any): mapDispatchToPropsType => {
     return {
-        addPost: () => {
-            dispatch(addPostActionCreator())
-        },
-        postChange: (body: string) => {
-            dispatch(updateNewPostTextCreator(body))
+        addPost: (newPostBody: string) => {
+            dispatch(addPostActionCreator(newPostBody))
         }
     }
 }

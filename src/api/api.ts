@@ -4,7 +4,7 @@ const instanse = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0',
     headers: {
-        "API-KEY": "67826485-0736-4a8b-bcb2-5e0a03d704b3"
+        "API-KEY": "9796e0df-7156-4180-913f-3e6c30a4c76a"
     }
 })
 
@@ -30,7 +30,7 @@ export const usersAPI = {
         })
     },
     getProfile(userId: number){
-        console.warn('Obsolete method profileApi object')
+        console.warn('Obsolete method. Please profileApi object')
        return profileAPI.getProfile(userId)
     }
 }
@@ -47,12 +47,18 @@ export const profileAPI = {
     }
 }
 
-export const auth = {
+export const authAPI = {
     me(){
         return instanse.get(
             `auth/me`
         ).then(response => {
             return response.data
         })
+    },
+    login(email: string, password: string, rememberMe: boolean) {
+      return instanse.post(`/auth/login`,{email, password, rememberMe})
+    },
+    antiLogin() {
+       return instanse.delete(`/auth/login`)
     }
 }

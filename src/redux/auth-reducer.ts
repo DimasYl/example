@@ -1,4 +1,4 @@
-import {auth} from "../api/api";
+import {authAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import { RootReduxState } from "./redux-store";
 
@@ -13,9 +13,23 @@ type SetAuthReducerActionType = {
     data: DataType
 }
 
-type ActionType =  SetAuthReducerActionType
+type AutLoginActionType = {
+    type: 'AUT_LOGIN'
+    data: {
+        userId: number
+    }
+}
+type AntiLoginActionType = {
+    type: 'ANTI_LOGIN'
+    data: {}
+}
+
+
+type ActionType =  SetAuthReducerActionType | AutLoginActionType | AntiLoginActionType
 
 const SET_USER_DATA = 'SET_USER_DATA'
+const AUT_LOGIN = 'AUT_LOGIN'
+const ANTI_LOGIN = 'ANTI_LOGIN'
 
 type AuthType = {
     userId: string | null
@@ -39,6 +53,11 @@ const authReducer = (state = initialState, action: ActionType): AuthType  => {
                 ...action.data,
                 isAuth: true
             }
+        case "AUT_LOGIN":
+            return {
+                ...state,
+                userId: state.userId
+            }
         default:
             return state
     }
@@ -52,12 +71,32 @@ type ThunkType = ThunkAction<void, RootReduxState, unknown, ActionType>
 
 export const author = ():ThunkType => {
     return (dispatch) => {
-        auth.me().then((data) => {
+        authAPI.me().then((data) => {
             if(data.resultCode === 0){
                 let {userId,login,email} = data.data
                 dispatch(setAuthUserData(userId,email,login))
             }
         })
+    }
+}
+
+export const autLogin = (): ThunkType => {
+    const email = 'dima.ilyushin.2016@mail.ru'
+        const password = '1105Taska1992'
+    return (dispatch) => {
+        authAPI.login(email,password,true)
+            .then((res)=>{
+                return res.data
+            })
+    }
+}
+
+export const antiLogin = (): ThunkType => {
+    return (dispatch) => {
+        authAPI.antiLogin()
+            .then((res) => {
+                return res.data
+            })
     }
 }
 

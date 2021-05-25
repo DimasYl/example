@@ -1,29 +1,28 @@
 import profileReducer, {ProfileType} from "./profile-reducer";
 import dialogsReducer, {ActionTypes} from "./dialog-reducer";
 
-export type PostType = {
+ type PostType = {
     id: number
     message: string
     likesCount: number
 }
-export type DialogsType = {
+ type DialogsType = {
     name: string
     id: number
 }
-export type MessageType = {
+ type MessageType = {
     id: number
     message: string
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: ProfileType | null
     status: string
 }
-export type DialogsPageType = {
+
+type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
-    newMessageBody: string
 }
 type Sidebar = {}
 
@@ -50,7 +49,6 @@ const store: StoreType = {
                 {id: 3, message: 'Blabla', likesCount: 25},
                 {id: 4, message: 'Dada', likesCount: 25}
             ],
-            newPostText: 'it-kamasutra.com',
             profile: null,
             status: ''
         },
@@ -69,8 +67,7 @@ const store: StoreType = {
                 {id: 3, message: 'Yo'},
                 {id: 4, message: 'Yo'},
                 {id: 5, message: 'Yo'}
-            ],
-            newMessageBody: ''
+            ]
         },
         sidebar: {}
     },
