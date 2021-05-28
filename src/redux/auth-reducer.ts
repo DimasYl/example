@@ -6,21 +6,22 @@ export type DataType = {
     userId: string | null
     email: string | null
     login: string | null
+    isAuth: boolean
 }
 
 type SetAuthReducerActionType = {
     type: 'SET_USER_DATA'
-    data: DataType
+    payload: DataType
 }
 
 type AutLoginActionType = {
-    type: 'AUT_LOGIN'
+    type: 'LOGIN'
     data: {
         userId: number
     }
 }
 type AntiLoginActionType = {
-    type: 'ANTI_LOGIN'
+    type: 'OUT_LOGIN'
     data: {}
 }
 
@@ -28,8 +29,6 @@ type AntiLoginActionType = {
 type ActionType =  SetAuthReducerActionType | AutLoginActionType | AntiLoginActionType
 
 const SET_USER_DATA = 'SET_USER_DATA'
-const AUT_LOGIN = 'AUT_LOGIN'
-const ANTI_LOGIN = 'ANTI_LOGIN'
 
 type AuthType = {
     userId: string | null
@@ -50,13 +49,7 @@ const authReducer = (state = initialState, action: ActionType): AuthType  => {
         case "SET_USER_DATA":
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
-            }
-        case "AUT_LOGIN":
-            return {
-                ...state,
-                userId: state.userId
+                ...action.payload
             }
         default:
             return state
@@ -64,40 +57,37 @@ const authReducer = (state = initialState, action: ActionType): AuthType  => {
 }
 
 export const setAuthUserData =
-    (userId: string | null,email: string | null,login: string | null): SetAuthReducerActionType =>
-    ({type: SET_USER_DATA,data: {userId,email,login}})
+    (userId: string | null,email: string | null,login: string | null, isAuth: boolean): SetAuthReducerActionType =>
+    ({type: SET_USER_DATA,payload: {userId,email,login, isAuth}})
 
 type ThunkType = ThunkAction<void, RootReduxState, unknown, ActionType>
 
-export const author = ():ThunkType => {
-    return (dispatch) => {
+export const getAuthUserData = ():ThunkType => (dispatch) =>
         authAPI.me().then((data) => {
             if(data.resultCode === 0){
                 let {userId,login,email} = data.data
-                dispatch(setAuthUserData(userId,email,login))
+                dispatch(setAuthUserData(userId,email,login, true))
             }
         })
-    }
+
+
+
+export const login = (email: string, password: string, rememberMe: boolean): ThunkType=> (dispatch) => {
+    authAPI.login(email, password, rememberMe)
+        .then (response => {
+            if(response.data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            }
+        })
 }
 
-export const autLogin = (): ThunkType => {
-    const email = 'dima.ilyushin.2016@mail.ru'
-        const password = '1105Taska1992'
-    return (dispatch) => {
-        authAPI.login(email,password,true)
-            .then((res)=>{
-                return res.data
-            })
-    }
-}
-
-export const antiLogin = (): ThunkType => {
-    return (dispatch) => {
-        authAPI.antiLogin()
-            .then((res) => {
-                return res.data
-            })
-    }
+export const logout = (): ThunkType=> (dispatch) => {
+    authAPI.logout()
+        .then (response => {
+            if(response.data.resultCode === 0) {
+                dispatch(setAuthUserData(null,null,null, false))
+            }
+        })
 }
 
 export default authReducer

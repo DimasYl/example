@@ -49,16 +49,14 @@ export const profileAPI = {
 
 export const authAPI = {
     me(){
-        return instanse.get(
-            `auth/me`
-        ).then(response => {
+        return instanse.get(`/auth/me`).then(response => {
             return response.data
         })
     },
-    login(email: string, password: string, rememberMe: boolean) {
-      return instanse.post(`/auth/login`,{email, password, rememberMe})
-    },
-    antiLogin() {
-       return instanse.delete(`/auth/login`)
+   login(email: string,password: string,rememberMe: boolean = false) {
+        return instanse.post(`/auth/login`, {email, password, rememberMe})
+   },
+   logout() {
+    return instanse.delete(`/auth/login`)
     }
 }
