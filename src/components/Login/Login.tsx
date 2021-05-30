@@ -35,6 +35,9 @@ export const LoginForm = (props: any) => {
             <Field component={Input} validate={[required]} name={'rememberMe'} type={"checkbox"}/> remember me
         </div>
         <div>
+            <div>
+                {props.error}
+            </div>
             <button>Login</button>
         </div>
     </form>
