@@ -15,6 +15,13 @@ import Users from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount, getUser,
+} from "../../redux/users-selector";
 
 
 type MapStateToPropsType = {
@@ -24,7 +31,6 @@ type MapStateToPropsType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: number[]
-    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -43,6 +49,9 @@ type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
+        // const {currentPage, pageSize} = this.props
+        // this.props.getUsers(currentPage, pageSize)
+        //вот так круче по феншую что выше
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
@@ -73,13 +82,12 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
 let mapStateToProps = (state: RootReduxState): MapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth
+        users: getUser(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 }
 

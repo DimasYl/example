@@ -32,7 +32,7 @@ export const LoginForm = (props: any) => {
             <Field component={Input} validate={[required]} name={'password'} placeholder={'Password'} type={'password'}/>
         </div>
         <div>
-            <Field component={Input} validate={[required]} name={'rememberMe'} type={"checkbox"}/> remember me
+            <Field component={Input}  name={'rememberMe'} type={"checkbox"}/> remember me
         </div>
         <div>
             <div>

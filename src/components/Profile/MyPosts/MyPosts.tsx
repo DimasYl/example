@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {reduxForm, Field} from "redux-form";
+import {Field, reduxForm} from "redux-form";
 import {ProfilePageType} from "../../../redux/profile-reducer";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
@@ -13,9 +13,12 @@ type MyPostsType = {
 }
 
 
-export const MyPosts: React.FC<MyPostsType> = (props) => {
-    let profilePage = props.profilePage
-    let postsElement = profilePage.posts.map(p => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>)
+export const MyPosts = React.memo((props: MyPostsType) => {
+    console.log('MyPosts RENDER')
+    console.log(props)
+
+    let postsElement = props.profilePage.posts.map(p => <Post message={p.message} key={p.id}
+                                                              likesCount={p.likesCount}/>)
 
     let addPost = (values: any) => {
         // alert(values.newPostBody)
@@ -25,13 +28,13 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
     return (
         <div className={s.postsBlok}>
             <h3>My posts</h3>
-           <MyPostReduxForm onSubmit={addPost} />
+            <MyPostReduxForm onSubmit={addPost}/>
             <div className={s.posts}>
                 {postsElement}
             </div>
         </div>
     )
-}
+});
 
 let maxlength10 = maxLengthCreator(10)
 

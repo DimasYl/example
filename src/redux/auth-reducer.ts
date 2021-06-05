@@ -63,38 +63,33 @@ export const setAuthUserData =
 
 type ThunkType = ThunkAction<void, RootReduxState, unknown, ActionType>
 
-export const getAuthUserData = ():ThunkType => (dispatch) => {
-       return authAPI.me().then((data) => {
-        if (data.resultCode === 0) {
-            let {userId, login, email} = data.data
+export const getAuthUserData = ():ThunkType => async (dispatch) => {
+    let response = await authAPI.me()
+        if (response.resultCode === 0) {
+            let {userId, login, email} = response.data
             dispatch(setAuthUserData(userId, email, login, true))
         }
-    })
+
 }
 
 
 
-export const login = (email: string, password: string, rememberMe: boolean): ThunkType=> (dispatch) => {
-    authAPI.login(email, password, rememberMe)
-        .then (response => {
+export const login = (email: string, password: string, rememberMe: boolean): ThunkType=> async (dispatch) => {
+    let response = await authAPI.login(email, password, rememberMe)
             if(response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
             } else {
                 let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
                 // @ts-ignore
                 dispatch(stopSubmit("login", {_error: message}))
-
             }
-        })
 }
 
-export const logout = (): ThunkType=> (dispatch) => {
-    authAPI.logout()
-        .then (response => {
+export const logout = (): ThunkType=> async (dispatch) => {
+    let response = await authAPI.logout()
             if(response.data.resultCode === 0) {
                 dispatch(setAuthUserData(null,null,null, false))
             }
-        })
 }
 
 export default authReducer
