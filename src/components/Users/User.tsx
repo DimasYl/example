@@ -1,7 +1,7 @@
 import {UsersType} from "../../redux/users-reducer";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import userPhoto from "../../assets/images/user.png";
+import userPhoto from "../../assets/images/user.jpg";
 import styles from "./Users.module.css";
 
 type UserPropsType = {
@@ -16,7 +16,7 @@ export const User: React.FC<UserPropsType> = ({users, followingInProgress, follo
             <span>
                 <div>
                     <NavLink to={'/profile/' + u.id}><img alt={''}
-                                                          src={u.photos.small != null ? u.photos.small() : userPhoto}
+                                                          src={u.photos.small != null ? u.photos.small : userPhoto}
                                                           className={styles.photo}/>
                     </NavLink>
                 </div>

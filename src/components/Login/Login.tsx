@@ -7,34 +7,50 @@ import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {RootReduxState} from "../../redux/redux-store";
 
- const Login = (props:any) => {
+
+type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: string | null
+
+}
+
+const Login = (props: any) => {
     const onSubmit = (formData: any) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
-    if(props.isAuth) {
+    if (props.isAuth) {
         return <Redirect to='/profile'/>
     }
 
     return <div>
         <h1>Login</h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
+        <LoginReduxForm onSubmit={onSubmit}
+                        // captchaUrl={props.captchaUrl}
+        />
     </div>
 }
 
 
+
 export const LoginForm = (props: any) => {
+
     return <form onSubmit={props.handleSubmit}>
+
+        {/*{createField('Email', 'email', [required], Input)}*/}
+
+        <Field component={Input} validate={[required]} name={'email'} placeholder={'Email'}/>
+
+        {/*{createField('Password', 'password', [required], Input)}*/}
+        <Field component={Input} validate={[required]} name={'password'} placeholder={'Password'} type={'password'}/>
+
         <div>
-            <Field component={Input} validate={[required]} name={'email'} placeholder={'Email'}/>
+            <Field component={Input} name={'rememberMe'} type={"checkbox"}/> remember me
         </div>
         <div>
-            <Field component={Input} validate={[required]} name={'password'} placeholder={'Password'} type={'password'}/>
-        </div>
-        <div>
-            <Field component={Input}  name={'rememberMe'} type={"checkbox"}/> remember me
-        </div>
-        <div>
+            {props.captchaUrl && <img alt={''} src={props.captchaUrl}/>}
             <div>
                 {props.error}
             </div>
@@ -46,15 +62,17 @@ export const LoginForm = (props: any) => {
 const LoginReduxForm = reduxForm({form: 'Login'})(LoginForm)
 
 type MapStateToPropsType = {
-     isAuth: boolean
+    isAuth: boolean
+    captchaUrl: string | null
 }
 
 type MapDispatchToPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
 const mapStateToProps = (state: RootReduxState): MapStateToPropsType => ({
-     isAuth: state.auth.isAuth
+    captchaUrl: state.auth.captchaUrl,
+    isAuth: state.auth.isAuth
 })
 
-export default connect<MapStateToPropsType,MapDispatchToPropsType,{},RootReduxState>(mapStateToProps,{login})(Login)
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootReduxState>(mapStateToProps, {login})(Login)
