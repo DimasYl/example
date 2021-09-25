@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from "react-router-dom"
+import {BrowserRouter, Redirect, Route} from "react-router-dom"
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
@@ -47,6 +47,7 @@ class App extends React.Component<AppPropsType> {
                         <Route path='/music' component={Music}/>
                         <Route path='/news' component={News}/>
                         <Route path='/settings' component={Settings}/>
+                        <Redirect to={'/profile'}/>
                     </div>
                 </div>
             </BrowserRouter>

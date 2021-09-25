@@ -2,6 +2,7 @@ import React from 'react'
 import {UsersType} from "../../redux/users-reducer";
 import Paginator from "../common/Paginator/Paginator";
 import {User} from "./User";
+import s from './Users.module.css'
 
 type UsersPropsType = {
     users: Array<UsersType>
@@ -24,7 +25,7 @@ const Users = (props: UsersPropsType) => {
         pages.push(i)
     }
 
-    return <div>
+    return <div className={s.usersContainer}>
         <Paginator currentPage={props.currentPage}
                    onPageChanged={props.onPageChanged}
                     totalItemsCount={props.totalUsersCount}

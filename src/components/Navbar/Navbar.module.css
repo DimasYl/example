@@ -1,6 +1,9 @@
 .nav {
     grid-area: n;
-    background-color: green;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: #262737;
     padding: 20px;
 }
 

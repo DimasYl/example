@@ -1,11 +1,25 @@
-.descriptionBlock{
-    padding: 10px;
-}
+.descriptionBlock {
+    display: flex;
 
-.image{
-    max-width: 1000px ;
 }
 
 .contacts {
     padding-left: 10px;
+}
+.photo {
+    width: 50%;
+    padding: 10px;
+}
+.forMe {
+    padding-left: 20px;
+    padding-top: 50px;
+    color: #e6dede;
+}
+
+.about {
+    color: #e6dede;
+    padding-left: 80px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
 }

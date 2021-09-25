@@ -21,19 +21,19 @@ const SEND_MESSAGE = "SEND_MESSAGE"
 
 let initialState: DialogsPageType = {
     dialogs: [
-        {name: 'Dimych', id: 1},
-        {name: 'Andrey', id: 2},
+        {name: 'Dimka', id: 1},
+        {name: 'Kirik', id: 2},
         {name: 'Sveta', id: 3},
         {name: 'Sasha', id: 4},
         {name: 'Victor', id: 5},
         {name: 'Valera', id: 6}
     ],
     messages: [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'How is yuor it-kamasutra'},
-        {id: 3, message: 'Yo'},
-        {id: 4, message: 'Yo'},
-        {id: 5, message: 'Yo'}
+        {id: 1, message: 'Hey Ya'},
+        {id: 2, message: 'how are you'},
+        {id: 3, message: 'Hi'},
+        {id: 4, message: 'Hello man'},
+        {id: 5, message: 'Cull'}
     ]
 }
 

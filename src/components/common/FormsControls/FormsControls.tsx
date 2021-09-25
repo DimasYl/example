@@ -20,7 +20,6 @@ export const FormControl = ({input, meta, child, ...props}) => {
 
 export const Textarea = (props: any) => {
     const {input, meta, child, ...restProps} = props
-    // @ts-ignore
     return <FormControl {...props}> <textarea {...input} {...restProps} /></FormControl>
 }
 

@@ -1,8 +1,8 @@
 import {UsersType} from "../../redux/users-reducer";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import userPhoto from "../../assets/images/user.jpg";
-import styles from "./Users.module.css";
+import userPhoto from "../../assets/images/users2.png";
+import s from "./User.module.css";
 
 type UserPropsType = {
     users: Array<UsersType>
@@ -17,28 +17,25 @@ export const User: React.FC<UserPropsType> = ({users, followingInProgress, follo
                 <div>
                     <NavLink to={'/profile/' + u.id}><img alt={''}
                                                           src={u.photos.small != null ? u.photos.small : userPhoto}
-                                                          className={styles.photo}/>
+                                                          className={s.photo}/>
                     </NavLink>
                 </div>
                 <div>
-                    {u.followed ? <button disabled={followingInProgress.some(id => id === u.id)}
+                    {u.followed ? <button style={{marginLeft: 20}} disabled={followingInProgress.some(id => id === u.id)}
                                           onClick={() => {
                                               unfollow(u.id)
                                           }}>UnFollow</button>
-                        : <button disabled={followingInProgress.some(id => id === u.id)}
+                        : <button style={{marginLeft: 20}} disabled={followingInProgress.some(id => id === u.id)}
                                   onClick={() => {
                                       follow(u.id)
                                   }}>Follow</button>}
                 </div>
             </span>
             <span>
-                <div>{u.name}</div>
-                <div>{u.status}</div>
+                <div style={{color: '#e6dede', paddingLeft: 20}}>{u.name}</div>
+                <div  style={{color: '#e6dede'}}>{u.status}</div>
             </span>
-            <span>
-                <div>{'u.location.country'}</div>
-                <div>{'u.location.city'}</div>
-            </span>
+
         </div>)}
     </div>
 }

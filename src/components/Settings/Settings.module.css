@@ -1,0 +1,17 @@
+.settings {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 50px;
+    color: #e6dede;
+}
+.settings button {
+    width: 100px;
+    height: 30px;
+}
+.settings h3 {
+    margin-bottom: 5px;
+}

@@ -6,15 +6,10 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {RootReduxState} from "../../redux/redux-store";
+import s from './Login.module.css'
 
 
-type FormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-    captcha: string | null
 
-}
 
 const Login = (props: any) => {
     const onSubmit = (formData: any) => {
@@ -25,8 +20,8 @@ const Login = (props: any) => {
         return <Redirect to='/profile'/>
     }
 
-    return <div>
-        <h1>Login</h1>
+    return <div className={s.loginContainer}>
+        <h1 style={{color: '#e6dede'}}>Login</h1>
         <LoginReduxForm onSubmit={onSubmit}
                         // captchaUrl={props.captchaUrl}
         />
